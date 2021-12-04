@@ -47,7 +47,6 @@ describe('[GET] /api/v1/orders/show', () => {
         .get(`/api/v1/orders/show`)
         .set('Cookie', user2)
         .expect(200);
-      console.log('asasd:', orders);
 
       expect(orders.length).toEqual(2);
       expect(orders[0].id).toEqual(order2.id);

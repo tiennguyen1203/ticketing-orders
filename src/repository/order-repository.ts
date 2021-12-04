@@ -37,4 +37,8 @@ export class OrderRepository {
 
     return OrderModel.find(filter);
   }
+
+  static findById(id: string) {
+    return OrderModel.findById(id);
+  }
 }
