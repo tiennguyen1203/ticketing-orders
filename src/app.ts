@@ -2,7 +2,7 @@ import { currentUser, errorHandler, NotFoundError } from '@tnticketing/common';
 import cookieSession from 'cookie-session';
 import express, { json } from 'express';
 import 'express-async-errors';
-import { ticketsRoutes } from './routes/tickets';
+import { ticketsRoutes } from './routes/orders';
 
 const app = express();
 app.set('trust proxy', true);
@@ -15,7 +15,7 @@ app.use(
 );
 app.use(currentUser);
 
-app.use('/api/v1/tickets', ticketsRoutes);
+app.use('/api/v1/orders', ticketsRoutes);
 
 app.all('*', async () => {
   throw new NotFoundError('Not found');

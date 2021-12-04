@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tnticketing/common": "^1.0.7",
+    "@tnticketing/common": "^1.0.8",
     "@typegoose/typegoose": "^9.1.0",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
