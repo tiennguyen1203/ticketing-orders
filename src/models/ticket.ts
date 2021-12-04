@@ -1,7 +1,9 @@
-import { getModelForClass, Prop } from '@typegoose/typegoose';
+import { getModelForClass, mongoose, Prop } from '@typegoose/typegoose';
 import { OrderRepository } from '../repository/order-repository';
 
 export class Ticket {
+  id?: mongoose.Types.ObjectId;
+
   @Prop({ required: true })
   title: string;
 

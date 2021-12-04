@@ -6,6 +6,8 @@ import {
   requireAuth,
 } from '@tnticketing/common';
 import { Request, Response, Router } from 'express';
+import { NatsWrapper } from '../../nats/nats-wrapper';
+import { OrderCreatedPublisher } from '../../nats/publishers/order-created-publisher';
 import { OrderRepository } from '../../repository/order-repository';
 import { TicketRepository } from '../../repository/ticket-repository';
 import { createOrderBodyValidator } from '../../validators/orders';
@@ -38,6 +40,17 @@ router.post(
       status: OrderStatus.Created,
     });
     await order.save();
+
+    new OrderCreatedPublisher(NatsWrapper.client).publish({
+      id: order.id,
+      status: order.status,
+      expiresAt: order.expiresAt.toISOString(),
+      userId: order.userId,
+      ticket: {
+        id: ticket.id,
+        price: ticket.price,
+      },
+    });
 
     res.status(201).send(order);
   }

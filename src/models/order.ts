@@ -1,5 +1,7 @@
 import { OrderStatus } from '@tnticketing/common';
 import { getModelForClass, mongoose, Prop } from '@typegoose/typegoose';
+import { BeAnObject } from '@typegoose/typegoose/lib/types';
+import { Document } from 'mongoose';
 import { Ticket } from './ticket';
 
 export class Order {
@@ -19,7 +21,7 @@ export class Order {
   expiresAt: Date;
 
   @Prop({ required: true, ref: 'Ticket' })
-  ticket: Ticket;
+  ticket: Ticket | (Ticket & Document<any, BeAnObject, any>);
 }
 
 export const OrderModel = getModelForClass(Order, {

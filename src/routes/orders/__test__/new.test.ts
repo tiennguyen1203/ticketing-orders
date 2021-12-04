@@ -49,7 +49,7 @@ describe('[POST] /api/v1/orders/new', () => {
           });
         });
 
-        describe.skip('When ticket have not reserved', () => {
+        describe('When ticket have not reserved', () => {
           it('<201> Should return created order, and publish order:created event', async () => {
             const ticket = new TicketModel({
               title: 'concert',
@@ -65,7 +65,7 @@ describe('[POST] /api/v1/orders/new', () => {
               .expect(201);
 
             expect(NatsWrapper.client.publish).toHaveBeenCalledTimes(1);
-            expect(response.body.ticket).toMatchObject(ticket);
+            expect(response.body.ticket.id).toEqual(ticket.id);
             expect(response.body.id).toBeDefined();
           });
         });
